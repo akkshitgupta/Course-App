@@ -1,25 +1,41 @@
 const express = require("express");
-const route = express.Router();
+const router = express.Router();
+const { token } = require("../middleware/auth");
 
-const USERS = [];
+const { USERS } = require("../databases/index");
 
-route.post("/signup", (req, res) => {
+// user signup route
+router.post("/signup", async (req, res) => {
   const { f_name, l_name, username, password } = req.body;
-  const newUser = { f_name, l_name, username, password };
-  USERS.push(newUser);
-  res.json({ newUser, message: "Account created successfully" });
+  USERS.findOne({ username }).then((user) => {
+    if (user) {
+      return res.json({ message: "Username is not available" });
+    } else {
+      const obj = { f_name, l_name, username, password };
+      const newUser = new USERS(obj);
+      newUser.save();
+
+      const yourToken = token(obj);
+
+      res.json({ newUser, yourToken, message: "Account created successfully" });
+    }
+  });
 });
 
-route.post("/login", (req, res) => {
+// user login route
+router.post("/login", (req, res) => {
   const { username, password } = req.body;
-  const ind = USERS.findIndex((user) => user.username === username);
-  if (ind === -1) {
-    res.status(404).json({ message: "User doesn't exist" });
-  }
-  if (USERS[ind]["password"] !== password) {
-    res.status(403).json({ message: "Invalid username or password" });
-  }
-  res.json({ message: "Login successful" });
+
+  USERS.findOne({ username }).then((user) => {
+    if (!user) {
+      return res.status(404).json({ message: "User doesn't exist" });
+    }
+    if (user.password !== password) {
+      return res.status(403).json({ message: "Invalid username or password" });
+    }
+    const yourToken = token(user);
+    res.json({ yourToken, message: "Login successful" });
+  });
 });
 
-module.exports = route;
+module.exports = router;

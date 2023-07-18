@@ -1,27 +1,42 @@
 const express = require("express");
 const router = express.Router();
 
-const ADMIN = [];
+const { token } = require("../middleware/auth");
+const { ADMINS } = require("../databases/index");
 
-// signup route
+// admin signup route
 router.post("/signup", (req, res) => {
   const { f_name, l_name, username, password } = req.body;
-  const newAdmin = { f_name, l_name, username, password };
-  ADMIN.push(newAdmin);
-  res.json({ newAdmin, message: "Account created successfully" });
+  ADMINS.findOne({ username }).then((admin) => {
+    if (admin) {
+      return res.json({ message: "Username is not available" });
+    }
+    const obj = { f_name, l_name, username, password };
+    const newAdmin = new ADMINS(obj);
+    newAdmin.save();
+    const yourToken = token(obj);
+    res.json({
+      newAdmin,
+      yourToken,
+      message: "Account created successfully",
+    });
+  });
 });
 
-// login route
+// admin login route
 router.post("/login", (req, res) => {
   const { username, password } = req.body;
-  const ind = ADMIN.findIndex((admin) => admin.username === username);
-  if (ind === -1) {
-    res.status(404).json({ message: "User doesn't exist" });
-  }
-  if (ADMIN[ind]["password"] !== password) {
-    res.status(403).json({ message: "Invalid username or password" });
-  }
-  res.json({ message: "Login successful" });
+  ADMINS.findOne({ username }).then((admin) => {
+    if (!admin) {
+      return res.json({ message: "User doesn't exist" });
+    }
+    if (admin.password !== password) {
+      return res.json({ message: "Invalid username or password" });
+    }
+    const yourToken = token(admin);
+
+    res.json({ yourToken, message: "Login successful" });
+  });
 });
 
 module.exports = router;

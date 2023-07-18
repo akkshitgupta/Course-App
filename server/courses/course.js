@@ -1,50 +1,61 @@
 const express = require("express");
-const route = express.Router();
+const router = express.Router();
+const { auth } = require("../middleware/auth");
 
-const COURSES = [];
+const { COURSES } = require("../databases/index");
 
-route.post("/create", (req, res) => {
-  const { title, code, description, price, image } = req.body;
+// creating a course
+router.post("/create", auth, (req, res) => {
+  const { title, description, price, image } = req.body;
   const newCourse = {
     title,
-    code,
     description,
     price,
     image,
   };
+  const course = new COURSES(newCourse);
+  course.save();
 
-  COURSES.push(newCourse);
-  res.status(201).json({ newCourse, message: "Course create successfully" });
+  res.json({ newCourse, message: "Course create successfully" });
 });
 
-route.get("/all", (req, res) => {
-  res.json({ courses: COURSES });
+// get all courses
+router.get("/all", auth, async (req, res) => {
+  const courses = await COURSES.find();
+  res.json({ courses });
 });
 
-route.get("/:id", (req, res) => {
+// edit a course
+router.put("/:id", auth, async (req, res) => {
   const { id } = req.params;
-  const ind = COURSES.findIndex((course) => course.course_code === id);
-  if (ind === -1) {
-    res.status(404).json({ message: "Course not found" });
+  const course = await COURSES.findByIdAndUpdate(id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+  if (!course) {
+    return res.json({ message: "Course not found" });
   }
-  res.json({ course: COURSES[ind] });
+  res.json({ course, message: "Course updated successfully" });
 });
 
-route.put("/:id", (req, res) => {
+// get a single course
+router.get("/:id", auth, async (req, res) => {
   const { id } = req.params;
-  const { title, code, description, price, image } = req.body;
-  const ind = COURSES.findIndex((course) => course.course_code === id);
-  if (ind === -1) {
-    res.status(404).json({ message: "Course not found" });
+  const course = await COURSES.findById(id);
+  if (!course) {
+    return res.json({ message: "Course not found" });
   }
-  COURSES[ind] = {
-    title,
-    code,
-    description,
-    price,
-    image,
-  };
-  res.json({ course: COURSES[ind], message: "Course updated successfully" });
+  res.json({ course });
 });
 
-module.exports = route;
+// delete a course
+router.delete("/:id", auth, async (req, res) => {
+  const { id } = req.params;
+  const course = await COURSES.deleteOne({ _id: id });
+  if (!course) {
+    return res.json({ message: "Course not found" });
+  }
+  res.json({ message: "Course deleted successfully" });
+});
+
+module.exports = router;
