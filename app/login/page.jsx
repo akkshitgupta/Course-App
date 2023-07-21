@@ -12,7 +12,7 @@ export default function Example() {
 
   async function login() {
     try {
-      const res = await axios.post("http://localhost:3002/user/login", user);
+      const res = await axios.post("/api/login", user);
       console.log(res);
     } catch (err) {
       console.log(err);

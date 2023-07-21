@@ -3,7 +3,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-export default function Example() {
+export default function Signup() {
   const [user, setUser] = useState({
     f_name: "",
     l_name: "",
@@ -14,8 +14,11 @@ export default function Example() {
 
   async function signup() {
     try {
-      const res = await axios.post("http://localhost:3002/user/signup", user);
-      console.log(res);
+      const res = await axios.post("/api/signup", user);
+
+      if (res.status === 201) {
+        alert("Account created successfully");
+      }
     } catch (err) {
       console.log(err);
     }
