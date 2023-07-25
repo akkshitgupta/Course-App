@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
 
 const userSchema = mongoose.Schema({
-  f_name: { type: String, required: true, min: 5, max: 15 },
-  l_name: { type: String, required: true, min: 5, max: 15 },
+  full_name: { type: String, required: true, min: 5, max: 15 },
   username: {
     type: String,
     required: true,

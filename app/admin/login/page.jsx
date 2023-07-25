@@ -2,91 +2,76 @@
 
 import { useState } from "react";
 import axios from "axios";
-import Link from "next/link";
 
-export default function Example() {
+export default function Login() {
   const [user, setUser] = useState({
     username: "",
     password: "",
   });
 
-  async function login() {
+  async function logIn() {
     try {
-      const res = await axios.post("http://localhost:3002/admin/login", user);
-      console.log(res);
+      const res = await axios.post("/api/login", user);
+
+      if (res.status === 201) {
+        alert("Login successful");
+      }
     } catch (err) {
       console.log(err);
     }
   }
 
   return (
-    <>
-      <div className="flex min-h-[90vh] flex-1 flex-col items-center justify-center px-6 py-12">
-        <div className="rounded-2xl border border-green-700 p-8 lg:w-4/6 lg:p-16">
-          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-green-900">
-              Create an Account
-            </h2>
-          </div>
-          <div className="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
-            {/* username */}
-            <div className="mb-3">
-              <label
-                htmlFor="username"
-                className="block text-sm font-medium leading-6 text-green-900"
-              >
-                Username
-              </label>
-
-              <input
-                id="username"
-                name="username"
-                type="text"
-                autoComplete="username"
-                required
-                onChange={(e) => setUser({ ...user, username: e.target.value })}
-                className="block w-full rounded-md border-0 py-1.5 text-green-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
-              />
-            </div>
-
-            {/* password */}
-            <div className="mb-3">
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-green-900"
-                >
-                  Create Password
-                </label>
-              </div>
-
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                required
-                onChange={(e) => setUser({ ...user, password: e.target.value })}
-                className="block w-full rounded-md border-0 py-1.5 text-green-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
-              />
-            </div>
-
-            {/* button */}
-            <div>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  login();
-                }}
-                className="w-full rounded-md bg-green-700 px-3 py-2 text-center text-sm font-semibold leading-7 text-white shadow-sm hover:bg-green-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
-              >
-                Log in
-              </button>
-            </div>
-          </div>
-        </div>
+    <section className="container mx-auto flex flex-wrap items-center px-5 py-24">
+      <div className="pr-0 md:w-1/2 md:pr-16 lg:w-3/5 lg:pr-0">
+        <h1 className="title-font text-3xl font-bold text-gray-900">
+          Login to{" "}
+          <span className="text-3xl font-bold text-green-500 underline">
+            YOUR
+          </span>{" "}
+          Account
+        </h1>
       </div>
-    </>
+      <div className="mt-10 flex w-full flex-col rounded-lg bg-green-50 p-8 md:ml-auto md:mt-0 md:w-1/2 lg:w-2/6">
+        <h2 className="mb-5 text-lg font-bold text-green-900">Log In</h2>
+        <div className="relative mb-4">
+          <label htmlFor="username" className="text-sm leading-7 text-gray-600">
+            Username
+          </label>
+          <input
+            onChange={(e) => setUser({ ...user, username: e.target.value })}
+            type="text"
+            id="username"
+            name="username"
+            className="w-full rounded border border-gray-300 bg-white px-3 py-1 text-base leading-8 text-gray-700 outline-none transition-colors duration-200 ease-in-out focus:border-green-500 focus:ring-2 focus:ring-green-200"
+          />
+        </div>
+        <div className="relative mb-4">
+          <label htmlFor="password" className="text-sm leading-7 text-gray-600">
+            Enter Password
+          </label>
+          <input
+            onChange={(e) => setUser({ ...user, password: e.target.value })}
+            type="password"
+            id="password"
+            name="password"
+            className="w-full rounded border border-gray-300 bg-white px-3 py-1 text-base leading-8 text-gray-700 outline-none transition-colors duration-200 ease-in-out focus:border-green-500 focus:ring-2 focus:ring-green-200"
+          />
+        </div>
+        <button
+          className="rounded-lg border-0 bg-green-600 px-8 py-2 text-lg text-white hover:bg-green-700 hover:font-medium focus:outline-none"
+          onClick={logIn}
+        >
+          Log In
+        </button>
+        <p className="mt-2 text-sm leading-7 text-gray-600">
+          don&#39;t have an account?{" "}
+          <a href="/signup" className="font-semibold text-green-500 underline">
+            create now
+          </a>{" "}
+          for free
+        </p>
+      </div>
+    </section>
   );
 }

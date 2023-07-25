@@ -1,8 +1,7 @@
 import mongoose, { mongo } from "mongoose";
 
 const adminSchema = mongoose.Schema({
-  f_name: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
-  l_name: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
+  full_name: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
   username: {
     type: String,
     required: true,
@@ -12,7 +11,7 @@ const adminSchema = mongoose.Schema({
     max: 15,
   },
   email: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.email,
     ref: "users",
   },
   password: { type: String, required: true, min: 5, max: 15 },
