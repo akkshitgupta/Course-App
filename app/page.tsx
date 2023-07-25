@@ -1,13 +1,15 @@
 import Card from "@components/Card";
-import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-12">
-      {/* card container */}
-      <section className="mx-auto h-96 w-2/3 rounded-md border-2 border-green-600 p-4 ">
-        <Card title={"hello"} />
-      </section>
-    </main>
+    <section className="text-gray-600">
+      <div className="container mx-auto px-5 py-24">
+        <div className="-m-4 flex flex-wrap">
+          <Card />
+          <Card />
+          <Card />
+        </div>
+      </div>
+    </section>
   );
 }

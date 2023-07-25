@@ -4,24 +4,20 @@ import { NextResponse } from "next/server";
 
 connectDB();
 
-export async function POST(req) {
+export async function POST(req, res) {
   try {
     const reqBody = await req.json();
-    const { f_name, l_name, email, username, password } = reqBody;
+    const { full_name, email, username, password } = reqBody;
 
     // check if user exists
-    const user = await USER.findOne({ email });
+    const user = await USER.findOne({ $or: [{ email }, { username }] });
 
     if (user) {
-      return NextResponse.json(
-        { error: "User already exists" },
-        { status: 400 },
-      );
+      return NextResponse.json({ error: "User already exists", status: 409 });
     }
 
     const newUser = new USER({
-      f_name,
-      l_name,
+      full_name,
       email,
       username,
       password,
