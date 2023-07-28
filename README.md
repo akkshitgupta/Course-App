@@ -20,7 +20,7 @@ For now, json web token is used to test the authentication logic. Soon, Next.js 
 ![image](https://github.com/akkshitgupta/course-selling-app/assets/96991785/30bc5e69-1ade-4caf-91bc-56d1ecc6cb9a)
 
 2. Make a local copy of project by cloning it.
-> /* open your terminal or command prompt */
+> Open your terminal or command prompt and run the below commands
 ```
 git clone https://github.com/user_name/course-selling-app.git
 cd course-selling-app
@@ -48,5 +48,10 @@ yarn run dev
 cd server
 node index.js
 ```
+OR skip above if want to use NEXTjs backend feature, for that,
+
+> copy the `.env.example` file as `.env` and replace all the sample credentials with yours originals.
+> Get your `MONGO_URL` and `MONGO_DB` credentials and replace them with those in `.env` 
+
 6. Test the endpoints in Postman
 > Soon, API endpoints will be available on Postman to fast forward your API learning process 
