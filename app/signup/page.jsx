@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function Signup() {
+  const router = useRouter();
   const [user, setUser] = useState({
     full_name: "",
     username: "",
@@ -12,10 +14,15 @@ export default function Signup() {
   });
 
   async function signUp() {
-    const res = await axios.post("/api/signup", user);
+    const res = await axios.post("/api/signup", user, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     console.log(res);
     if (res.data.status === 201) {
       alert("Account created successfully");
+      return router.push("/login");
     }
     if (res.data.status === 409) {
       return alert("User already exists");

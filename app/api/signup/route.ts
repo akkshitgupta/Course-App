@@ -1,10 +1,11 @@
 import { connectDB } from "../../../dbConfig/dbConfig";
 import USER from "../../../models/userModel";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import generateToken from "@helpers/generateToken";
 
 connectDB();
 
-export async function POST(req, res) {
+export async function POST(req: NextRequest) {
   try {
     const reqBody = await req.json();
     const { full_name, email, username, password } = reqBody;
@@ -24,14 +25,24 @@ export async function POST(req, res) {
     });
 
     const saved = await newUser.save();
-    console.log(saved);
+    const token = generateToken(newUser);
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       saved,
       message: "User created successfully",
       status: 201,
     });
-  } catch (error) {
-    return NextResponse.json({ message: error.message, status: 500 });
+
+    response.cookies.set("token", token, {
+      httpOnly: true,
+      path: "/",
+    });
+
+    return response;
+  } catch (error: any) {
+    return NextResponse.json({
+      message: `signUp_Error: ${error.message}`,
+      status: 500,
+    });
   }
 }

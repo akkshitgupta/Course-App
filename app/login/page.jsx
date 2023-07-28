@@ -1,9 +1,12 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useState } from "react";
 import axios from "axios";
 
-export default function Signup() {
+export default function Login() {
+  const router = useRouter();
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -12,10 +15,11 @@ export default function Signup() {
   async function logIn() {
     try {
       const res = await axios.post("/api/login", user);
-
-      if (res.status === 201) {
-        alert("Login successful");
+      if (res.data.status === 201) {
+        alert(res.data.message);
+        return router.push("/dashboard");
       }
+      alert(res.data.message);
     } catch (err) {
       console.log(err);
     }
@@ -66,9 +70,12 @@ export default function Signup() {
         </button>
         <p className="mt-2 text-sm leading-7 text-gray-600">
           don&#39;t have an account?{" "}
-          <a href="/signup" className="font-semibold text-green-500 underline">
+          <Link
+            href="/signup"
+            className="font-semibold text-green-500 underline"
+          >
             create now
-          </a>{" "}
+          </Link>{" "}
           for free
         </p>
       </div>

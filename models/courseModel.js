@@ -8,6 +8,7 @@ const courseSchema = mongoose.Schema({
   author: { type: mongoose.Schema.Types.ObjectId, ref: "admins" },
 });
 
-const COURSE = mongoose.model("courses", courseSchema);
+const COURSE =
+  mongoose.models.courses || mongoose.model("courses", courseSchema);
 
 export default COURSE;

@@ -18,6 +18,6 @@ const adminSchema = mongoose.Schema({
   createdCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: "courses" }],
 });
 
-const ADMIN = mongoose.model("admins", adminSchema);
+const ADMIN = mongoose.models.admins || mongoose.model("admins", adminSchema);
 
 export default ADMIN;
