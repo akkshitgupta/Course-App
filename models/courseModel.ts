@@ -1,6 +1,15 @@
 import mongoose from "mongoose";
 
-const courseSchema = mongoose.Schema({
+export interface Course {
+  _id: string;
+  title: string;
+  description: string;
+  price: number;
+  image: string;
+  author: mongoose.Schema.Types.ObjectId;
+}
+
+const courseSchema = new mongoose.Schema<Course, mongoose.Model<Course>>({
   title: { type: String, required: true, max: 25 },
   description: { type: String, required: true },
   price: { type: Number, required: true },

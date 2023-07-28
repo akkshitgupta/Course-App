@@ -2,15 +2,20 @@
 
 import axios from "axios";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function AddingCourse() {
+  const router = useRouter();
   const [course, setCourse] = useState({});
 
   async function addCourse() {
     try {
       const res = await axios.post("/api/courses", course);
-      console.log(res);
       setCourse({});
+      if (res.data.status === 201) {
+        alert("Course added successfully!");
+        return router.push("/courses");
+      }
     } catch (error) {
       console.log(error);
     }

@@ -29,7 +29,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/profile/[id]/page.jsx",
-    "components/Card.jsx"
+    "components/CourseCard.tsx",
+    "models/courseModel.js"
   ],
   "exclude": ["node_modules"]
 }
