@@ -23,6 +23,6 @@ const userSchema = mongoose.Schema({
   isAuthor: { type: Boolean, default: false },
 });
 
-const USER = mongoose.model("users", userSchema);
+const USER = mongoose.models.users || mongoose.model("users", userSchema);
 
 export default USER;

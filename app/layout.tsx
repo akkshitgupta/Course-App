@@ -1,6 +1,10 @@
+"use client";
+
 import "./globals.css";
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
+
+import { RecoilRoot } from "recoil";
 
 export default function RootLayout({
   children,
@@ -9,11 +13,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <Navbar />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
-      </body>
+      <RecoilRoot>
+        <body>
+          <Navbar />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+        </body>
+      </RecoilRoot>
     </html>
   );
 }
