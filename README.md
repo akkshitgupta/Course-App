@@ -1,4 +1,4 @@
-# Course Selling App
+# Course App
 This is an online course selling app. Students now able to learn from any teacher around the globe without the hesitation of being there or not being able to reach there.
 
 This app is build using MERN Tech Stack. 
