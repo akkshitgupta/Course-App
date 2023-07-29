@@ -22,11 +22,12 @@ export default function Courses() {
   }, []);
 
   return (
-    <div>
-      <h1>Course</h1>
-      {courses.map((course) => (
-        <Card key={course._id} course={course} />
-      ))}
-    </div>
+    <section className="container mx-auto px-5 py-24">
+      <div className="-m-4 flex flex-wrap">
+        {courses.map((course) => (
+          <Card key={course._id} course={course} />
+        ))}
+      </div>
+    </section>
   );
 }

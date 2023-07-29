@@ -3,12 +3,19 @@
 import { loginState } from "@store/atoms/loginState";
 import Link from "next/link";
 import { useRecoilState } from "recoil";
+import axios from "axios";
+import { useEffect } from "react";
 
 const Navbar = () => {
   const [login, setLogin] = useRecoilState(loginState);
-  // const handleEvent = () => {
-  //   setLogin((prev) => !prev);
-  // };
+
+  useEffect(() => {
+    axios.get("/api/me").then((res) => {
+      if (res.data.message === "Logged in") {
+        setLogin(true);
+      }
+    });
+  }, [login, setLogin]);
 
   return (
     <nav className="body-font bg-green-700 text-green-100">
@@ -26,40 +33,18 @@ const Navbar = () => {
           >
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
           </svg>
-          <span className="ml-3 text-xl">Tailblocks</span>
+          <span className="ml-3 text-xl">Course App</span>
         </a>
 
-        {/* <nav className="flex flex-wrap items-center justify-center text-base md:ml-auto">
-          <a className="mr-5 hover:text-green-200">First Link</a>
-          <a className="mr-5 hover:text-green-200">Second Link</a>
-          <a className="mr-5 hover:text-green-200">Third Link</a>
-          <a className="mr-5 hover:text-green-200">Fourth Link</a>
-        </nav> */}
-
         {/* Login button */}
-        {/* {!login && (
+        {!login && (
           <Link href="/login">
-            <button
-              className="mt-4 inline-flex items-center rounded border bg-white px-3 py-1 text-base text-green-600 hover:border-green-50 hover:bg-green-800 hover:text-green-50 focus:outline-none md:mt-0"
-              onClick={() => {
-                setLogin((prev) => !prev);
-              }}
-            >
-              Login */}
-        {/* <svg
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            className="ml-1 h-4 w-4"
-            viewBox="0 0 24 24"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7"></path>
-          </svg> */}
-        {/* </button>
+            <button className="mt-4 inline-flex items-center rounded border bg-white px-3 py-1 text-base text-green-600 hover:border-green-50 hover:bg-green-800 hover:text-green-50 focus:outline-none md:mt-0">
+              Login
+            </button>
           </Link>
-        )} */}
+        )}
+
         {/* Add Course button */}
         {login && (
           <Link href="/add-course">

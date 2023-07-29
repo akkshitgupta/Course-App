@@ -15,9 +15,9 @@ export default function Login() {
   async function logIn() {
     try {
       const res = await axios.post("/api/login", user);
-      if (res.data.status === 201) {
+      if (res.data.status === 200) {
         alert(res.data.message);
-        return router.push("/dashboard");
+        return router.push("/");
       }
       alert(res.data.message);
     } catch (err) {
