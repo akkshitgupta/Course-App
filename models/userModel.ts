@@ -1,6 +1,16 @@
 import mongoose from "mongoose";
 
-const userSchema = mongoose.Schema({
+export interface User {
+  _id: string;
+  full_name: string;
+  email: string;
+  username: string;
+  password: string;
+  purchases: mongoose.Schema.Types.ObjectId[];
+  isAuthor: boolean;
+}
+
+const userSchema = new mongoose.Schema<User, mongoose.Model<User>>({
   full_name: { type: String, required: true, min: 5, max: 15 },
   username: {
     type: String,
