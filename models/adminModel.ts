@@ -1,7 +1,15 @@
 import mongoose, { mongo } from "mongoose";
 
-const adminSchema = mongoose.Schema({
-  full_name: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
+export interface Admin {
+  _id: string;
+  userId: mongoose.Schema.Types.ObjectId;
+  username: string;
+  password: string;
+  createdCourses: mongoose.Schema.Types.ObjectId[];
+}
+
+const adminSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "users" },
   username: {
     type: String,
     required: true,
@@ -9,10 +17,6 @@ const adminSchema = mongoose.Schema({
     dropDups: true,
     min: 5,
     max: 15,
-  },
-  email: {
-    type: mongoose.Schema.Types.email,
-    ref: "users",
   },
   password: { type: String, required: true, min: 5, max: 15 },
   createdCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: "courses" }],
