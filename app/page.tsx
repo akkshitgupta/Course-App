@@ -16,8 +16,8 @@ export default function Home() {
 
   return (
     <section className="text-gray-600">
-      <div className="container mx-auto px-5 py-24">
-        <div className="-m-4 flex flex-wrap">
+      <div className="container mx-auto px-5 py-6">
+        <div className="flex flex-wrap">
           {courses.map((course) => (
             <Card key={course._id} course={course} />
           ))}

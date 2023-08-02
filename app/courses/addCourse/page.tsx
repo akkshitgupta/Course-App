@@ -32,7 +32,9 @@ export default function AddingCourse() {
         </h1>
       </div>
       <div className="mt-10 flex w-full flex-col rounded-lg bg-green-50 p-8 md:ml-auto md:mt-0 md:w-1/2 lg:w-2/6">
-        <h2 className="mb-5 text-lg font-bold text-green-900">Sign Up</h2>
+        <h2 className="mb-5 text-lg font-bold text-green-900">
+          Course Details
+        </h2>
         <div className="relative mb-4">
           <label htmlFor="title" className="text-sm leading-7 text-gray-600">
             Title
