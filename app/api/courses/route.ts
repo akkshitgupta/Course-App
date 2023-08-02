@@ -1,6 +1,7 @@
 import { connectDB } from "@dbConfig/dbConfig";
 import Course from "@models/courseModel";
 import { NextRequest, NextResponse } from "next/server";
+import { headers } from "next/dist/client/components/headers";
 
 connectDB();
 
@@ -20,12 +21,12 @@ export async function POST(req: NextRequest) {
   return response;
 }
 
-export async function GET(params: { _id: string }) {
-  const { _id } = params;
-  console.log(_id);
-  if (_id) {
-    const course = await Course.findById(_id);
-    console.log(course);
+export async function GET() {
+  const useHeader = headers();
+  const id = useHeader.get("id");
+  if (id) {
+    const course = await Course.findById(id);
+
     const response = NextResponse.json({
       status: 200,
       course,
@@ -36,6 +37,7 @@ export async function GET(params: { _id: string }) {
   const response = NextResponse.json({
     status: 200,
     courses,
+    message: "Courses fetched successfully",
   });
 
   return response;
