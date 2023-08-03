@@ -67,7 +67,7 @@ export default function Page({ params }: { params: { _id: string } }) {
                   ₹{course?.price}
                 </span>
                 <Link
-                  href={`buy/${params._id}`}
+                  href={`/buy/${params._id}`}
                   className="w-40 rounded-md bg-green-700 py-3 text-center text-white"
                 >
                   Buy Now

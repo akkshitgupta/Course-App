@@ -20,8 +20,10 @@ export const config = {
     "/me",
     "/me/(.*)",
     "/login",
+    "/admin/(.*)",
     "/signup",
     "/logout",
+    "/buy/(.*)",
     "/courses/addCourse",
   ],
 };
