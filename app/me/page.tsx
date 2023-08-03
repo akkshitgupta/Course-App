@@ -1,21 +1,16 @@
 "use client";
 
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useRecoilState } from "recoil";
+import { userDataAtom } from "@store/atoms";
 
 function Me() {
-  const [data, setData] = useState<any>();
-  useEffect(() => {
-    axios.get("/api/me").then((res) => {
-      console.log(res.data);
-      setData(res.data.userData);
-    });
-  }, []);
+  const [data, setData] = useRecoilState(userDataAtom);
 
   return (
     <div>
       <h3>This is me route</h3>
-      <p>{data?.full_name}</p>
+      <p>{data?.username}</p>
     </div>
   );
 }

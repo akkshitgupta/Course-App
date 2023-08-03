@@ -40,7 +40,8 @@ export async function POST(req: NextRequest) {
 
     response.cookies.set("token", token, {
       httpOnly: true,
-      path: "/",
+      // path: "/",
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
     });
 
     return response;
