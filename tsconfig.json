@@ -30,7 +30,8 @@
     ".next/types/**/*.ts",
     "app/profile/[id]/page.jsx",
     "components/CourseCard.tsx",
-    "models/courseModel.js"
+    "models/courseModel.js",
+    "app/api/auth/[...nextauth]/route.js"
   ],
   "exclude": ["node_modules"]
 }
