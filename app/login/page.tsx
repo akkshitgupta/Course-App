@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useState } from "react";
 import axios from "axios";
+import ProvidersList from "@components/ProvidersList";
 
 export default function Login() {
   const router = useRouter();
@@ -27,8 +28,8 @@ export default function Login() {
 
   return (
     <section className="container mx-auto flex flex-wrap items-center px-5 py-24">
-      <div className="pr-0 md:w-1/2 md:pr-16 lg:w-3/5 lg:pr-0">
-        <h1 className="title-font text-3xl font-bold text-gray-900">
+      <div className="text-center md:w-1/2 md:pr-16 lg:w-3/5 lg:pr-0">
+        <h1 className="text-3xl font-bold text-gray-900">
           Login to{" "}
           <span className="text-3xl font-bold text-green-500 underline">
             YOUR
@@ -36,9 +37,15 @@ export default function Login() {
           Account
         </h1>
       </div>
-      <div className="mt-10 flex w-full flex-col rounded-lg bg-green-50 p-8 md:ml-auto md:mt-0 md:w-1/2 lg:w-2/6">
-        <h2 className="mb-5 text-lg font-bold text-green-900">Log In</h2>
-        <div className="relative mb-4">
+      <div className="mx-auto mt-10 flex flex-col rounded-lg bg-green-50 p-8 md:ml-auto md:mt-0 md:w-1/2 lg:w-2/6">
+        <span className="my-2 text-sm font-medium">
+          Login with your social media account
+        </span>
+        <ProvidersList />
+        <div className="relative mb-4 flex flex-col">
+          <span className="my-2 text-sm font-medium">
+            OR login with your credentials
+          </span>
           <label htmlFor="username" className="text-sm leading-7 text-gray-600">
             Username
           </label>
@@ -68,7 +75,7 @@ export default function Login() {
         >
           Log In
         </button>
-        <p className="mt-2 text-sm leading-7 text-gray-600">
+        <span className="mt-2 text-sm leading-7 text-gray-600">
           don&#39;t have an account?{" "}
           <Link
             href="/signup"
@@ -77,7 +84,7 @@ export default function Login() {
             create now
           </Link>{" "}
           for free
-        </p>
+        </span>
       </div>
     </section>
   );

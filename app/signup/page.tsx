@@ -3,6 +3,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import ProvidersList from "@components/ProvidersList";
 
 export default function Signup() {
   const router = useRouter();
@@ -31,7 +33,7 @@ export default function Signup() {
 
   return (
     <section className="container mx-auto flex flex-wrap items-center px-5 py-24">
-      <div className="pr-0 md:w-1/2 md:pr-16 lg:w-3/5 lg:pr-0">
+      <div className="mx-auto md:w-1/2 md:pr-16 lg:w-3/5 lg:pr-0">
         <h1 className="title-font text-3xl font-bold text-gray-900">
           Create an account for{" "}
           <span className="text-3xl font-bold text-green-500 underline">
@@ -39,9 +41,15 @@ export default function Signup() {
           </span>
         </h1>
       </div>
-      <div className="mt-10 flex w-full flex-col rounded-lg bg-green-50 p-8 md:ml-auto md:mt-0 md:w-1/2 lg:w-2/6">
-        <h2 className="mb-5 text-lg font-bold text-green-900">Sign Up</h2>
-        <div className="relative mb-4">
+      <div className="mx-auto mt-10 flex flex-col rounded-lg bg-green-50 p-8 md:ml-auto md:mt-0 md:w-1/2 lg:w-2/6">
+        <span className="my-2 text-sm font-medium">
+          Login with your social media account
+        </span>
+        <ProvidersList />
+        <div className="relative mb-4 flex flex-col">
+          <span className="my-2 text-sm font-medium">
+            OR login with your credentials
+          </span>
           <label
             htmlFor="full_name"
             className="text-sm leading-7 text-gray-600"
@@ -98,6 +106,16 @@ export default function Signup() {
         >
           Sign Up
         </button>
+        <span className="mt-2 text-sm leading-7 text-gray-600">
+          Already have an account?{" "}
+          <Link
+            href="/login"
+            className="font-semibold text-green-500 underline"
+          >
+            Login here
+          </Link>{" "}
+          for free
+        </span>
       </div>
     </section>
   );
