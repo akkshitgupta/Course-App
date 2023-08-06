@@ -8,7 +8,7 @@ import { signIn, useSession, signOut, getProviders } from "next-auth/react";
 const Navbar = () => {
   // const { data: session } = useSession();
   const [providers, setProviders] = useState(null);
-  const login = true;
+  const login = false;
   const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
@@ -57,13 +57,20 @@ const Navbar = () => {
                 <Link href={"/me/myPurchases"}>My Purchases</Link>
                 <Link href={"/admin/signup"}>Become a Creator</Link>
                 <button className="justify-self-end" onClick={() => signOut()}>
-                  Sign Out
+                  Log Out
                 </button>
               </div>
             )}
           </div>
         ) : (
-          <div></div>
+          <div>
+            <Link
+              href={"/login"}
+              className="rounded-md bg-green-50 px-3 py-1.5 text-gray-700 hover:shadow-md "
+            >
+              Login In
+            </Link>
+          </div>
         )}
       </div>
     </nav>
