@@ -2,17 +2,18 @@
 This is an online course selling app. Students now able to learn from any teacher around the globe without the hesitation of being there or not being able to reach there.
 
 This app is build using MERN Tech Stack. 
-## Frondend - NEXT.js
+## FULLSTACK - NEXT.js
 Frontend is created using the Next.js framework built over the top of the React.js which made working with React.js even better.
+Backend is also done using serverless functions of the Next.js within in the api folder with the help of app routes
 
-## Backend - Express.js
-Backend is created using the Express.js framework, which is used to create the HTTP Server and handle all the logic of the app working behind the scenes of any video streaming app. For now, routes are being handled using backend and soon it would be done using Next.js routing feature.
+~~## Backend - Express.js
+Backend is created using the Express.js framework, which is used to create the HTTP Server and handle all the logic of the app working behind the scenes of any video streaming app. For now, routes are being handled using backend and soon it would be done using Next.js routing feature.~~
 
 ## DataBase - MongoDB
 MongoDB is being used to store the data related to the app like user data, creator data, created video lectures, etc. Mongoose library which works great with Express.js
 
-## Authentication - JWT tokens
-For now, json web token is used to test the authentication logic. Soon, Next.js authentication system would be implemented for better user experience as google auth and twitter auth would help user to sign in easily. Also, it would help the maintainers to verify the credibility of the app users
+## Authentication - Next-Auth
+~~For now, json web token is used to test the authentication logic. Soon,~~ (Next-auth)[https://next-auth.js.org/] library has been implemented for better user experience as Google auth and GitHub auth for user to sign in easily. Also, it help the maintainers to verify the credibility of the app users
 
 ## Local Setup
 
