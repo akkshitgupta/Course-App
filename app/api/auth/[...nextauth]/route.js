@@ -16,34 +16,35 @@ const handler = NextAuth({
       clientSecret: process.env.GITHUB_SECRET,
     }),
   ],
+  callbacks: {
+    async session({ session }) {
+      const sessionUser = await USER.findOne({ email: session.user.email });
 
-  async session({ session }) {
-    const sessionUser = await USER.findOne({ email: session.user.email });
+      session.user.id = sessionUser._id.toString();
 
-    session.user.id = sessionUser._id.toString();
+      return session;
+    },
+    async signIn({ profile }) {
+      try {
+        await connectDB();
 
-    return session;
-  },
-  async signIn({ profile }) {
-    try {
-      await connectDB();
+        const user = await USER.findOne({ email: profile.email });
+        if (user) return true;
 
-      const user = await USER.findOne({ email: profile.email });
-      if (user) return true;
+        const newUser = new USER({
+          full_name: profile.name,
+          email: profile.email,
+          username: profile.name.split("@")[0],
+          image: profile.picture,
+        });
 
-      const newUser = new USER({
-        name: profile.name,
-        email: profile.email,
-        username: profile.name.split("@")[0],
-        image: profile.picture,
-      });
-
-      await newUser.save();
-      return true;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
+        await newUser.save();
+        return router.push("/");
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+    },
   },
 });
 

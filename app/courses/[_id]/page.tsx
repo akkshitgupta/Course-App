@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Course } from "@models/courseModel";
 import axios from "axios";
 import Link from "next/link";
+import { PiCurrencyInrBold } from "react-icons/pi";
 
 export default function Page({ params }: { params: { _id: string } }) {
   const [course, setCourse] = useState<Course>();
@@ -33,7 +34,7 @@ export default function Page({ params }: { params: { _id: string } }) {
           <div className="h-64 overflow-hidden rounded-lg">
             <Image
               alt="content"
-              src={course?.image || "https://dummyimage.com/720x4001"}
+              src={course?.thumbnail || "https://dummyimage.com/720x4001"}
               width={1035}
               height={500}
             />
@@ -65,8 +66,9 @@ export default function Page({ params }: { params: { _id: string } }) {
             <div className="mt-4 flex flex-col border-t border-gray-200 pt-4 text-justify sm:mt-0 sm:w-2/3 sm:border-l sm:border-t-0 sm:py-8 sm:pl-8">
               <p className="text-lg leading-relaxed">{course?.description}</p>
               <div className="mt-8 flex items-center justify-between">
-                <span className="pl-8 text-xl font-semibold text-gray-500">
-                  ₹{course?.price}
+                <span className="flex items-center pl-8 text-xl font-semibold text-gray-500">
+                  <PiCurrencyInrBold className="pr-1 text-2xl font-black" />
+                  {course?.price || "Free"}
                 </span>
                 <Link
                   href={`/buy/${params._id}`}

@@ -3,21 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { signIn, useSession, signOut, getProviders } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
+import axios from "axios";
 
 const Navbar = () => {
-  // const { data: session } = useSession();
-  const [providers, setProviders] = useState(null);
-  const login = false;
+  const { data: session } = useSession();
   const [toggle, setToggle] = useState(false);
-
-  useEffect(() => {
-    const setupProvider = async () => {
-      const response: any = await getProviders();
-      setProviders(response);
-    };
-    setupProvider();
-  }, []);
 
   return (
     <nav className="bg-green-700 text-green-100">
@@ -38,12 +29,12 @@ const Navbar = () => {
           <span className="ml-3 text-xl">Course App</span>
         </Link>
 
-        {login ? (
+        {session?.user ? (
           <div>
             <Image
-              src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
-              width={100000}
-              height={100000}
+              src={session?.user?.image || ""}
+              width={400}
+              height={400}
               alt="NA"
               className="relative z-20 h-10 w-10 rounded-full md:h-14 md:w-14"
               onClick={() => setToggle((prev) => !prev)}
