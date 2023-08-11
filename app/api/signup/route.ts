@@ -7,7 +7,7 @@ connectDB();
 export async function POST(req: NextRequest) {
   try {
     const reqBody = await req.json();
-    const { userId, username, password } = reqBody;
+    const { full_name, email, username, password } = reqBody;
 
     // check if user exists
     const user = await USER.findOne({ username });
@@ -17,7 +17,8 @@ export async function POST(req: NextRequest) {
     }
 
     const newUser = new USER({
-      userId,
+      full_name,
+      email,
       username,
       password,
     });

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function Signup() {
   const [user, setUser] = useState({
@@ -12,30 +13,26 @@ export default function Signup() {
   });
 
   const router = useRouter();
+  const { data: session } = useSession();
 
   useEffect(() => {
-    axios
-      .get("/api/me")
-      .then((res) => {
-        if (res.data.status === 200) {
-          setUser({ ...user, userId: res.data.userData._id });
-          return;
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setUser({
+      ...user,
+      userId: session?.user?.id,
+      image: session?.user?.image,
+    });
   }, []);
 
   async function signUp() {
     try {
       const res = await axios.post("/api/admin/signup", user);
 
-      console.log(res);
-      if (res.status === 200) {
+      if (res.data.status === 201) {
         alert("Account created successfully");
         return router.back();
       }
+
+      return alert("Something went wrong");
     } catch (err) {
       console.log(err);
     }
