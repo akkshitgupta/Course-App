@@ -43,7 +43,7 @@ export async function GET() {
   const useHeader = headers();
   const id = useHeader.get("id");
   if (id) {
-    const course = await Course.findById(id);
+    const course = await Course.findById(id).populate("author");
 
     const response = NextResponse.json({
       status: 200,
@@ -51,7 +51,7 @@ export async function GET() {
     });
     return response;
   }
-  const courses = await Course.find();
+  const courses = await Course.find().populate("author");
   const response = NextResponse.json({
     status: 200,
     courses,

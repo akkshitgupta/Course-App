@@ -18,9 +18,6 @@ export default function CourseCard(props: { course: Course }) {
           height={1180}
         />
         <div className="p-6">
-          {/* <h2 className="title-font mb-1 text-xs font-medium tracking-widest text-gray-400">
-            CATEGORY
-          </h2> */}
           <h1 className="title-font mb-3 text-lg font-medium text-gray-900">
             {props.course.title}
           </h1>
@@ -30,14 +27,12 @@ export default function CourseCard(props: { course: Course }) {
           <div className="flex flex-wrap items-center">
             <Image
               width={300}
-              src={
-                "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
-              }
+              src={props.course?.author.image || ``}
               height={300}
               className="h-10 w-10 rounded-full"
               alt="NA"
             />
-            <span className="pl-2">author name</span>
+            <span className="pl-2">{props.course?.author.username || ""}</span>
 
             <span className="ml-auto mr-3 inline-flex items-center border-r-2 border-gray-200 py-1 pr-3 text-sm leading-none text-gray-700 md:ml-0 lg:ml-auto">
               <svg

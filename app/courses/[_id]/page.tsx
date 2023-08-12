@@ -44,7 +44,7 @@ export default function Page({ params }: { params: { _id: string } }) {
               {/* <div className="inline-flex h-20 w-20 items-center justify-center rounded-full border-2 border-green-200 p-1"> */}
               <Link href={`/64ce6e9f5502350ad5a8c0d4`}>
                 <Image
-                  src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
+                  src={course?.author.image || ""}
                   width={100}
                   height={100}
                   alt="NA"
@@ -54,13 +54,10 @@ export default function Page({ params }: { params: { _id: string } }) {
               {/* </div> */}
               <div className="flex flex-col items-center justify-center text-center">
                 <h2 className="title-font mt-4 text-lg font-medium text-gray-900">
-                  Phoebe Caulfield
+                  {course?.author.username || ""}
                 </h2>
                 <div className="mb-4 mt-2 h-1 w-12 rounded bg-green-500"></div>
-                <p className="text-base">
-                  Raclette knausgaard hella meggs normcore williamsburg enamel
-                  pin sartorial venmo tbh hot chicken gentrify portland.
-                </p>
+                <p className="text-base">{course?.author.about || ""}</p>
               </div>
             </div>
             <div className="mt-4 flex flex-col border-t border-gray-200 pt-4 text-justify sm:mt-0 sm:w-2/3 sm:border-l sm:border-t-0 sm:py-8 sm:pl-8">

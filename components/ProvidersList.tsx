@@ -13,7 +13,7 @@ export default function ProvidersList() {
   }, []);
 
   return (
-    <div className="mx-auto my-3 flex w-full justify-around border-b pb-4">
+    <div className="mx-auto my-3 flex w-full justify-around">
       {providers &&
         Object.values(providers).map((provider: any) => (
           <button
