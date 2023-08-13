@@ -4,19 +4,34 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Card from "@components/CourseCard";
 import { Course } from "@models/courseModel";
+import { useSession } from "next-auth/react";
+import { useSetRecoilState } from "recoil";
+import { userDataAtom } from "@store/atoms";
 
 function Me() {
+  const { data: session } = useSession();
   const [courses, setCourse] = useState<Course[]>([]);
+  const setUser = useSetRecoilState(userDataAtom);
 
   useEffect(() => {
     const fetchCourse = async () => {
-      const res = await axios.get("/api/courses/purchased");
-      console.log(res.data.userData);
+      const email = session?.user?.email;
+      console.log(email);
+
+      const res = await axios.get("/api/courses/purchased", {
+        headers: {
+          "Content-Type": "application/json",
+          userEmail: email,
+        },
+      });
+      console.log(res.data);
       console.log(res.data.userData.purchases);
       setCourse(res.data.userData.purchases);
     };
-    fetchCourse();
-  }, []);
+    if (session?.user) {
+      fetchCourse();
+    }
+  }, [session]);
 
   return (
     <section className="text-gray-600">
