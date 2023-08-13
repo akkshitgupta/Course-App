@@ -33,7 +33,8 @@
     "models/courseModel.js",
     "app/api/auth/[...nextauth]/route.js",
     "components/Provider.jsx",
-    "app/courses/addCourse/page.jsx"
+    "app/courses/addCourse/page.jsx",
+    "app/courses/...page.tsx"
   ],
   "exclude": ["node_modules"]
 }

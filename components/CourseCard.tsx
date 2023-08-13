@@ -12,7 +12,7 @@ export default function CourseCard(props: { course: Course }) {
       <div className="h-full overflow-hidden rounded-lg border-2 border-gray-200 border-opacity-80 duration-200 hover:scale-[1.015] hover:border-green-300 hover:shadow-lg hover:shadow-green-100">
         <Image
           className="w-full object-cover object-center md:h-36 lg:h-48"
-          src={props.course.image}
+          src={props.course.thumbnail}
           alt="blog"
           width={1770}
           height={1180}
@@ -27,7 +27,18 @@ export default function CourseCard(props: { course: Course }) {
           <p className="mb-3 truncate leading-relaxed">
             {props.course.description}
           </p>
-          <div className="flex flex-wrap items-center ">
+          <div className="flex flex-wrap items-center">
+            <Image
+              width={300}
+              src={
+                "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80"
+              }
+              height={300}
+              className="h-10 w-10 rounded-full"
+              alt="NA"
+            />
+            <span className="pl-2">author name</span>
+
             <span className="ml-auto mr-3 inline-flex items-center border-r-2 border-gray-200 py-1 pr-3 text-sm leading-none text-gray-700 md:ml-0 lg:ml-auto">
               <svg
                 className="mr-1 h-4 w-4"
@@ -45,7 +56,7 @@ export default function CourseCard(props: { course: Course }) {
             </span>
             <span className="inline-flex items-center text-sm leading-none text-gray-700">
               <PiCurrencyInrBold />
-              {props.course.price}
+              {props.course.price || "Free"}
             </span>
           </div>
         </div>

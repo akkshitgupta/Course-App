@@ -5,7 +5,7 @@ export interface Course {
   title: string;
   description: string;
   price: number;
-  image: string;
+  thumbnail: string;
   author: mongoose.Schema.Types.ObjectId;
 }
 
@@ -13,7 +13,7 @@ const courseSchema = new mongoose.Schema<Course, mongoose.Model<Course>>({
   title: { type: String, required: true, max: 25 },
   description: { type: String, required: true },
   price: { type: Number, required: true },
-  image: { type: String, required: true },
+  thumbnail: { type: String, required: true },
   author: { type: mongoose.Schema.Types.ObjectId, ref: "admins" },
 });
 

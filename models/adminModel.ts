@@ -6,6 +6,7 @@ export interface Admin {
   username: string;
   password: string;
   createdCourses: mongoose.Schema.Types.ObjectId[];
+  image: string;
 }
 
 const adminSchema = new mongoose.Schema({
@@ -20,6 +21,7 @@ const adminSchema = new mongoose.Schema({
   },
   password: { type: String, required: true, min: 5, max: 15 },
   createdCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: "courses" }],
+  image: { type: String },
 });
 
 const ADMIN = mongoose.models.admins || mongoose.model("admins", adminSchema);

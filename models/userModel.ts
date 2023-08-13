@@ -8,6 +8,7 @@ export interface User {
   password: string;
   purchases: mongoose.Schema.Types.ObjectId[];
   isAuthor: boolean;
+  image: string;
 }
 
 const userSchema = new mongoose.Schema<User, mongoose.Model<User>>({
@@ -28,9 +29,10 @@ const userSchema = new mongoose.Schema<User, mongoose.Model<User>>({
     min: 5,
     max: 15,
   },
-  password: { type: String, required: true, min: 5, max: 15 },
+  password: { type: String, min: 5, max: 15 },
   purchases: [{ type: mongoose.Schema.Types.ObjectId, ref: "courses" }],
   isAuthor: { type: Boolean, default: false },
+  image: { type: String },
 });
 
 const USER = mongoose.models.users || mongoose.model("users", userSchema);
