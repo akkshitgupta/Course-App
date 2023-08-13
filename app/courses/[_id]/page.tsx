@@ -6,8 +6,13 @@ import { Course } from "@models/courseModel";
 import axios from "axios";
 import Link from "next/link";
 import { PiCurrencyInrBold } from "react-icons/pi";
+import { useRouter } from "next/navigation";
+import { useRecoilValue } from "recoil";
+import { userEmailSelector } from "@store/selectors";
 
 export default function Page({ params }: { params: { _id: string } }) {
+  const router = useRouter();
+  const userEmail = useRecoilValue(userEmailSelector);
   const [course, setCourse] = useState<Course>();
   useEffect(() => {
     async function fetchPost() {
@@ -22,6 +27,22 @@ export default function Page({ params }: { params: { _id: string } }) {
     }
     fetchPost();
   }, [params._id]);
+
+  console.log(userEmail);
+
+  const buyCourse = async (id: string) => {
+    console.log(id);
+    try {
+      const res = await axios.post(`/api/courses/buy`, {
+        courseId: id,
+        userEmail,
+      });
+      console.log(res.data);
+      return router.push("/me");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <section className="text-gray-600">
@@ -67,12 +88,12 @@ export default function Page({ params }: { params: { _id: string } }) {
                   <PiCurrencyInrBold className="pr-1 text-2xl font-black" />
                   {course?.price || "Free"}
                 </span>
-                <Link
-                  href={`/buy/${params._id}`}
+                <button
+                  onClick={() => buyCourse(course?._id)}
                   className="w-40 rounded-md bg-green-700 py-3 text-center text-white"
                 >
                   Buy Now
-                </Link>
+                </button>
               </div>
             </div>
           </div>

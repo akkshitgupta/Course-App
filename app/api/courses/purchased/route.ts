@@ -1,18 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@dbConfig/dbConfig";
-import verifyToken from "@helpers/verifyToken";
+import { headers } from "next/dist/client/components/headers";
 import USER from "@models/userModel";
 
 connectDB();
 
 export async function GET(req: NextRequest) {
-  const token = req.cookies.get("token")?.value || "";
-  const username = verifyToken(token);
+  const userEmail = headers().get("userEmail");
 
   try {
     const userData = await USER.aggregate([
       {
-        $match: { username: username },
+        $match: { email: userEmail },
       },
       {
         $lookup: {
@@ -53,7 +52,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({
       message: "Purchases fetched successfully",
       status: 200,
-      userData: userData[0],
+      userData,
     });
   } catch (error) {
     console.log(`error ${error}`);
