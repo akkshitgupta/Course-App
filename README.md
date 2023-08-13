@@ -3,17 +3,15 @@ This is an online course selling app. Students now able to learn from any teache
 
 This app is build using MERN Tech Stack. 
 ## FULLSTACK - NEXT.js
-Frontend is created using the Next.js framework built over the top of the React.js which made working with React.js even better.
+Frontend is created using the [Next.js](https://nextjs.org/docs) framework built over the top of the React.js which made working with React.js even better.
 Backend is also done using serverless functions of the Next.js within in the api folder with the help of app routes
 
-~~## Backend - Express.js
-Backend is created using the Express.js framework, which is used to create the HTTP Server and handle all the logic of the app working behind the scenes of any video streaming app. For now, routes are being handled using backend and soon it would be done using Next.js routing feature.~~
 
 ## DataBase - MongoDB
 MongoDB is being used to store the data related to the app like user data, creator data, created video lectures, etc. Mongoose library which works great with Express.js
 
 ## Authentication - Next-Auth
-~~For now, json web token is used to test the authentication logic. Soon,~~ (Next-auth)[https://next-auth.js.org/] library has been implemented for better user experience as Google auth and GitHub auth for user to sign in easily. Also, it help the maintainers to verify the credibility of the app users
+[Next-auth](https://next-auth.js.org/) library has been implemented for better user experience as Google auth and GitHub auth for user to sign in easily. Also, it help the maintainers to verify the credibility of the app users
 
 ## Local Setup
 
@@ -44,15 +42,8 @@ npm run dev
 ```
 yarn run dev
 ```
-5. Host the server locally at `http://localhost:3002/` using
-```
-cd server
-node index.js
-```
-OR skip above if want to use NEXTjs backend feature, for that,
-
-> copy the `.env.example` file as `.env` and replace all the sample credentials with yours originals.
-> Get your `MONGO_URL` and `MONGO_DB` credentials and replace them with those in `.env` 
-
-6. Test the endpoints in Postman
-> Soon, API endpoints will be available on Postman to fast forward your API learning process 
+5. Set up the variables to locally run the code successfully
+- copy the `.env.example` file as `.env` and replace all the sample credentials with yours originals.
+- Get your `MONGO_URL` and `MONGO_DB` credentials and replace them with those in `.env`
+- Set a `SECRET_KEY` of your choice, it can be any random string.
+- Get your next-auth providers' credentials, atleast one. [learn more here](https://next-auth.js.org/configuration/providers/oauth#how-to)
