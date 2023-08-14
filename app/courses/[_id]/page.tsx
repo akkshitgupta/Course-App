@@ -7,12 +7,17 @@ import axios from "axios";
 import Link from "next/link";
 import { PiCurrencyInrBold } from "react-icons/pi";
 import { useRouter } from "next/navigation";
-import { useRecoilValue } from "recoil";
-import { userEmailSelector } from "@store/selectors";
+import { getSession } from "next-auth/react";
 
 export default function Page({ params }: { params: { _id: string } }) {
   const router = useRouter();
-  const userEmail = useRecoilValue(userEmailSelector);
+  const [user, setUser] = useState("");
+  const userId = async () => {
+    const session = await getSession();
+    setUser(session?.user.id);
+    return;
+  };
+
   const [course, setCourse] = useState<Course>();
   useEffect(() => {
     async function fetchPost() {
@@ -28,14 +33,14 @@ export default function Page({ params }: { params: { _id: string } }) {
     fetchPost();
   }, [params._id]);
 
-  console.log(userEmail);
+  userId();
 
   const buyCourse = async (id: string) => {
     console.log(id);
     try {
       const res = await axios.post(`/api/courses/buy`, {
         courseId: id,
-        userEmail,
+        userid: user,
       });
       console.log(res.data);
       return router.push("/me");
