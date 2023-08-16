@@ -45,28 +45,43 @@ const Navbar = () => {
         </Link>
 
         {session?.user ? (
-          <div>
-            <Image
-              src={session.user.image || ""}
-              width={400}
-              height={400}
-              alt="NA"
-              className="relative z-20 h-10 w-10 rounded-full md:h-14 md:w-14"
-              onClick={() => setToggle((prev) => !prev)}
-            />
-            {toggle && (
-              <div
-                className="absolute right-0 top-0 z-10 flex h-72 flex-col items-start rounded-md bg-green-100 px-5 py-8 text-green-800 md:right-8 md:top-14"
-                onClick={() => setToggle((prev) => !prev)}
+          <div className="flex items-center gap-10">
+            {session?.user.author && (
+              <Link
+                href={"/courses/addCourses"}
+                className="rounded-md border border-white px-2 py-1 text-lg font-semibold"
               >
-                <span className="mb-3 font-semibold">{session.user.name}</span>
-                <Link href={"/me"}>My Purchases</Link>
-                <Link href={"/admin/signup"}>Become a Creator</Link>
-                <button className="justify-self-end" onClick={() => signOut()}>
-                  Log Out
-                </button>
-              </div>
+                Add Course
+              </Link>
             )}
+            <div>
+              <Image
+                src={session.user.image || ""}
+                width={400}
+                height={400}
+                alt="NA"
+                className="relative z-20 h-10 w-10 rounded-full md:h-14 md:w-14"
+                onClick={() => setToggle((prev) => !prev)}
+              />
+              {toggle && (
+                <div
+                  className="absolute right-0 top-0 z-10 flex h-72 flex-col items-start rounded-md bg-green-100 px-5 py-8 text-green-800 md:right-8 md:top-14"
+                  onClick={() => setToggle((prev) => !prev)}
+                >
+                  <span className="mb-3 font-semibold">
+                    {session.user.name}
+                  </span>
+                  <Link href={"/me"}>My Purchases</Link>
+                  <Link href={"/admin/signup"}>Become a Creator</Link>
+                  <button
+                    className="justify-self-end"
+                    onClick={() => signOut()}
+                  >
+                    Log Out
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         ) : (
           <div>
