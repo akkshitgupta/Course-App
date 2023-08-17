@@ -2,9 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSession, signOut } from "next-auth/react";
-import axios from "axios";
 import ProviderList from "@components/ProvidersList";
 
 const Navbar = () => {
@@ -45,10 +44,10 @@ const Navbar = () => {
         </Link>
 
         {session?.user ? (
-          <div className="flex items-center gap-10">
+          <div className="flex items-center gap-16">
             {session?.user.author && (
               <Link
-                href={"/courses/addCourses"}
+                href={"/courses/addCourse"}
                 className="rounded-md border border-white px-2 py-1 text-lg font-semibold"
               >
                 Add Course
@@ -65,14 +64,18 @@ const Navbar = () => {
               />
               {toggle && (
                 <div
-                  className="absolute right-0 top-0 z-10 flex h-72 flex-col items-start rounded-md bg-green-100 px-5 py-8 text-green-800 md:right-8 md:top-14"
+                  className="absolute right-0 top-0 z-10 flex h-72 w-fit flex-col items-start rounded-md bg-green-100 px-5 py-8 text-green-800 md:right-8 md:top-14"
                   onClick={() => setToggle((prev) => !prev)}
                 >
                   <span className="mb-3 font-semibold">
                     {session.user.name}
                   </span>
                   <Link href={"/me"}>My Purchases</Link>
-                  <Link href={"/admin/signup"}>Become a Creator</Link>
+                  {session?.user.author ? (
+                    <Link href={"/myCourses"}>My Courses</Link>
+                  ) : (
+                    <Link href={"/admin/signup"}>Become a Creator</Link>
+                  )}
                   <button
                     className="justify-self-end"
                     onClick={() => signOut()}

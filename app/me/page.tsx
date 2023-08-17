@@ -20,7 +20,7 @@ function Me() {
           userEmail: email,
         },
       });
-      setCourse(res.data.userData[0].purchases);
+      setCourse(res.data.userData[0]?.purchases || []);
     };
     if (session?.user) {
       fetchCourse();

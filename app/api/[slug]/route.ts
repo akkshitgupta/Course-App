@@ -1,10 +1,13 @@
 import { connectDB } from "@dbConfig/dbConfig";
 import ADMIN from "@models/adminModel";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 connectDB();
 
-export async function GET({ params }: { params: { slug: string } }) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { slug: string } },
+) {
   try {
     const { slug } = params;
     const courses = await ADMIN.find({ slug });
