@@ -14,11 +14,13 @@ export default function Page({ params }: { params: { _id: string } }) {
   const [user, setUser] = useState("");
   const userId = async () => {
     const session = await getSession();
-    setUser(session?.user.id);
+    if (session?.user.id) {
+      setUser(session?.user.id);
+    }
     return;
   };
 
-  const [course, setCourse] = useState<Course>();
+  const [course, setCourse] = useState({} as Course);
   useEffect(() => {
     async function fetchPost() {
       try {
@@ -94,7 +96,7 @@ export default function Page({ params }: { params: { _id: string } }) {
                   {course?.price || "Free"}
                 </span>
                 <button
-                  onClick={() => buyCourse(course?._id)}
+                  onClick={() => buyCourse(course._id)}
                   className="w-40 rounded-md bg-green-700 py-3 text-center text-white"
                 >
                   Buy Now
