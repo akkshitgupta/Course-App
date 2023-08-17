@@ -14,7 +14,7 @@ export default function AddingCourse() {
       setCourse({});
       if (res.data.status === 201) {
         alert("Course added successfully!");
-        return router.push("/courses");
+        return router.push("/");
       }
     } catch (error) {
       console.log(error);
