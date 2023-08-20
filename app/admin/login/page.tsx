@@ -1,9 +1,12 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import axios from "axios";
 
 export default function Login() {
+  const router = useRouter();
+
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -11,10 +14,11 @@ export default function Login() {
 
   async function logIn() {
     try {
-      const res = await axios.post("/api/login", user);
+      const res = await axios.post("/api/admin/login", user);
 
-      if (res.status === 201) {
+      if (res.status === 200) {
         alert("Login successful");
+        return router.push("/myCourses");
       }
     } catch (err) {
       console.log(err);
