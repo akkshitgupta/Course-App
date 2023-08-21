@@ -102,6 +102,7 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+
 "@next/env@13.4.17":
   version "13.4.17"
   resolved "https://registry.yarnpkg.com/@next/env/-/env-13.4.17.tgz#65d51e87918ec10b8d5ee154c7ddfe94c85da89e"
@@ -591,6 +592,7 @@ camelcase-css@^2.0.1:
   integrity sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA==
 
 caniuse-lite@^1.0.30001406, caniuse-lite@^1.0.30001464, caniuse-lite@^1.0.30001517:
+
   version "1.0.30001521"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001521.tgz#e9930cf499f7c1e80334b6c1fbca52e00d889e56"
   integrity sha512-fnx1grfpEOvDGH+V17eccmNjucGUnCbP6KL+l5KqBIerp26WK/+RQ7CIDE37KGJjaPyqWXXlFUyKiWmvdNNKmQ==
@@ -770,6 +772,7 @@ ecdsa-sig-formatter@1.0.11:
     safe-buffer "^5.0.1"
 
 electron-to-chromium@^1.4.477:
+
   version "1.4.494"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.494.tgz#588f7a3d19d32a31f3a7e05d81b61d95d25b1555"
   integrity sha512-KF7wtsFFDu4ws1ZsSOt4pdmO1yWVNWCFtijVYZPUeW4SV7/hy/AESjLn/+qIWgq7mHscNOKAwN5AIM1+YAy+Ww==
@@ -1890,10 +1893,12 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
 
+
 next-auth@^4.22.3:
   version "4.23.1"
   resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-4.23.1.tgz#7a82f5327cf4c7e32819da4eb977f2251a23c3cf"
   integrity sha512-mL083z8KgRtlrIV6CDca2H1kduWJuK/3pTS0Fe2og15KOm4v2kkLGdSDfc2g+019aEBrJUT0pPW2Xx42ImN1WA==
+
   dependencies:
     "@babel/runtime" "^7.20.13"
     "@panva/hkdf" "^1.0.2"
@@ -1905,12 +1910,14 @@ next-auth@^4.22.3:
     preact-render-to-string "^5.1.19"
     uuid "^8.3.2"
 
+
 next@^13.4.13:
   version "13.4.17"
   resolved "https://registry.yarnpkg.com/next/-/next-13.4.17.tgz#b1a72bd14a9a4303ecc61a97daed8abb396f38b3"
   integrity sha512-f0L+lbQA+GFkHu9wpupiURLFIEEPSVQhUuR+5lQNI+aFzbCbCGl7h0Vurs1jA4wtP7T7fEO0iSWmt37+88wIZA==
   dependencies:
     "@next/env" "13.4.17"
+
     "@swc/helpers" "0.5.1"
     busboy "1.6.0"
     caniuse-lite "^1.0.30001406"
@@ -1919,6 +1926,7 @@ next@^13.4.13:
     watchpack "2.4.0"
     zod "3.21.4"
   optionalDependencies:
+
     "@next/swc-darwin-arm64" "13.4.17"
     "@next/swc-darwin-x64" "13.4.17"
     "@next/swc-linux-arm64-gnu" "13.4.17"
@@ -2301,6 +2309,7 @@ recoil@^0.7.7:
   integrity sha512-8Og5KPQW9LwC577Vc7Ug2P0vQshkv1y3zG3tSSkWMqkWSwHmE+by06L8JtnGocjW6gcCvfwB3YtrJG6/tWivNQ==
   dependencies:
     hamt_plus "1.0.2"
+
 
 reflect.getprototypeof@^1.0.3:
   version "1.0.3"
