@@ -6,11 +6,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 export default function Signup() {
-  const [user, setUser] = useState({
-    userId: "",
-    username: "",
-    password: "",
-  });
+  const [user, setUser] = useState({});
 
   const router = useRouter();
   const { data: session } = useSession();

@@ -6,7 +6,11 @@ export interface Course {
   description: string;
   price: number;
   thumbnail: string;
-  author: mongoose.Schema.Types.ObjectId;
+  author: {
+    username: string;
+    image: string;
+    about: string;
+  };
 }
 
 const courseSchema = new mongoose.Schema<Course, mongoose.Model<Course>>({
