@@ -10,17 +10,11 @@ export default function Middleware(request: NextRequest) {
     "";
 
   const authorPath =
-    pathname === "/courses/addCourse" ||
-    pathname === "/courses/editCourse" ||
-    pathname === "/myCourses";
+    pathname === "/courses/addCourse" || pathname === "/courses/editCourse";
   const isAdmin = request.cookies.get("admin-token")?.value || "";
 
   if ((!isAdmin || !isLoggedIn) && authorPath) {
-    return NextResponse.redirect(new URL("/admin/login", request.nextUrl));
-  }
-
-  if (isAdmin && pathname === "/admin/login") {
-    return NextResponse.next();
+    return NextResponse.redirect(new URL("/", request.nextUrl));
   }
 
   if (isLoggedIn && isPublicPath) {

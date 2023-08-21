@@ -1,10 +1,18 @@
+"use client";
+
 import Card from "@components/CourseCard";
 import { Course } from "@models/courseModel";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
-export default async function Home() {
-  const response = await axios.get("http://localhost:3000/api/courses");
-  const courses: Course[] = response.data.courses;
+export default function Home() {
+  const [courses, setCourses] = useState<Course[]>([]);
+
+  useEffect(() => {
+    axios.get("/api/courses").then((res) => {
+      setCourses(res.data.courses);
+    });
+  }, []);
 
   return (
     <section className="text-gray-600">
