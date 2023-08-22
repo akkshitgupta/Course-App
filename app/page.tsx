@@ -1,11 +1,18 @@
-import { NEXT_API_URL } from "@config";
-import { Course } from "@models/courseModel";
-import Card from "@components/CourseCard";
-import axios from "axios";
+"use client";
 
-export default async function Home() {
-  const resp = await axios.get(`${NEXT_API_URL}/courses`);
-  const courses: Course[] = await resp.data.courses;
+import Card from "@components/CourseCard";
+import { Course } from "@models/courseModel";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+export default function Home() {
+  const [courses, setCourses] = useState<Course[]>([]);
+
+  useEffect(() => {
+    axios.get("/api/courses").then((res) => {
+      setCourses(res.data.courses);
+    });
+  }, []);
 
   return (
     <section className="text-gray-600">
