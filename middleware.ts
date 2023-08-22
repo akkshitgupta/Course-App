@@ -8,13 +8,23 @@ export default function Middleware(request: NextRequest) {
     request.cookies.get("next-auth.session-token")?.value ||
     request.cookies.get("token")?.value ||
     "";
-
+  const loginAuthorPath = pathname === "/admin/login" || pathname === "/admin";
   const authorPath =
     pathname === "/courses/addCourse" || pathname === "/courses/editCourse";
   const isAdmin = request.cookies.get("admin-token")?.value || "";
 
-  if ((!isAdmin || !isLoggedIn) && authorPath) {
-    return NextResponse.redirect(new URL("/", request.nextUrl));
+  const isBuyPath = pathname === "/buy/(.*)";
+
+  if (isBuyPath && !isLoggedIn) {
+    return NextResponse.redirect(new URL("/login", request.nextUrl));
+  }
+
+  if (!isAdmin && authorPath) {
+    return NextResponse.redirect(new URL("/admin/login", request.nextUrl));
+  }
+
+  if (isAdmin && loginAuthorPath) {
+    return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
   }
 
   if (isLoggedIn && isPublicPath) {
