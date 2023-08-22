@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import axios from "axios";
 import ProvidersList from "@components/ProvidersList";
+import { NEXT_API_URL } from "@config";
 
 export default function Login() {
   const router = useRouter();
@@ -15,7 +16,7 @@ export default function Login() {
 
   async function logIn() {
     try {
-      const res = await axios.post("/api/login", user);
+      const res = await axios.post(`${NEXT_API_URL}/login`, user);
       if (res.data.status === 200) {
         alert(res.data.message);
         return router.push("/");

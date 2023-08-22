@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import axios from "axios";
+import { NEXT_API_URL } from "@config";
 
 export default function Login() {
   const router = useRouter();
@@ -13,7 +14,7 @@ export default function Login() {
 
   async function logIn() {
     try {
-      const res = await axios.post("/api/admin/login", user);
+      const res = await axios.post(`"${NEXT_API_URL}/admin/login`, user);
 
       if (res.data.status === 200) {
         alert("Login successful");

@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { Course } from "@models/courseModel";
 import Card from "@components/CourseCard";
 import axios from "axios";
+import { NEXT_API_URL } from "@config";
 
 function ShowCourses() {
   const { data: session } = useSession();
@@ -12,7 +13,7 @@ function ShowCourses() {
   const [courses, setCourse] = useState<Course[]>([]);
   const email = session?.user?.email;
   axios
-    .get("/api/courses/purchased", {
+    .get(`${NEXT_API_URL}/courses/purchased`, {
       headers: {
         "Content-Type": "application/json",
         userEmail: email,

@@ -5,6 +5,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import ProvidersList from "@components/ProvidersList";
+import { NEXT_API_URL } from "@config";
 
 export default function Signup() {
   const router = useRouter();
@@ -16,7 +17,7 @@ export default function Signup() {
   });
 
   async function signUp() {
-    const res = await axios.post("/api/signup", user, {
+    const res = await axios.post(`${NEXT_API_URL}/signup`, user, {
       headers: {
         "Content-Type": "application/json",
       },

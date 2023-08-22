@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { NEXT_API_URL } from "@config";
 
 export default function Signup() {
   const [user, setUser] = useState({});
@@ -21,7 +22,7 @@ export default function Signup() {
 
   async function signUp() {
     try {
-      const res = await axios.post("/api/admin/signup", user);
+      const res = await axios.post(`${NEXT_API_URL}/admin/signup`, user);
 
       if (res.data.status === 201) {
         alert("Account created successfully");

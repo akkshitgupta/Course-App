@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { NEXT_API_URL } from "@config";
 
 export default function AddingCourse() {
   const router = useRouter();
@@ -10,7 +11,7 @@ export default function AddingCourse() {
 
   async function addCourse() {
     try {
-      const res = await axios.post("/api/courses", course);
+      const res = await axios.post(`${NEXT_API_URL}/courses`, course);
       setCourse({});
       if (res.data.status === 201) {
         alert("Course added successfully!");
