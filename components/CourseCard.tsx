@@ -24,20 +24,31 @@ export default function CourseCard(props: { course: Course }) {
           <p className="mb-3 truncate leading-relaxed">
             {props.course.description}
           </p>
-          <div className="flex flex-wrap items-center justify-between">
-            <div className="flex items-center">
-              <Image
-                width={300}
-                src={props.course?.author.image || ``}
-                height={300}
-                className="h-10 w-10 rounded-full"
-                alt="NA"
-              />
-              <span className="pl-2">
-                {props.course?.author.username || ""}
-              </span>
-            </div>
+          <div className="flex flex-wrap items-center">
+            <Image
+              width={300}
+              src={props.course?.author.image || ``}
+              height={300}
+              className="h-10 w-10 rounded-full"
+              alt="NA"
+            />
+            <span className="pl-2">{props.course?.author.username || ""}</span>
 
+            <span className="ml-auto mr-3 inline-flex items-center border-r-2 border-gray-200 py-1 pr-3 text-sm leading-none text-gray-700 md:ml-0 lg:ml-auto">
+              <svg
+                className="mr-1 h-4 w-4"
+                stroke="currentColor"
+                strokeWidth="2"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                viewBox="0 0 24 24"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              1.2K
+            </span>
             <span className="inline-flex items-center text-sm leading-none text-gray-700">
               <PiCurrencyInrBold />
               {props.course.price || "Free"}

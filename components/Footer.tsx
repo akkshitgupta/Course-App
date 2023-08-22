@@ -21,10 +21,10 @@ export default function Footer() {
           <span className="ml-3 text-xl">Course App</span>
         </a>
         <p className="mt-4 text-sm text-green-200 sm:ml-4 sm:mt-0 sm:border-l-2 sm:border-green-200 sm:py-2 sm:pl-4">
-          &copy; 2023 Course App
+          © 2023 - 2024 Course App
           <Link
             href="https://twitter.com/akkshitgupta"
-            className="ml-1 text-green-100"
+            className="ml-1 text-green-200"
             rel="noopener noreferrer"
             target="_blank"
           >
