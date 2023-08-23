@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import axios from "axios";
+import { NEXT_API_URL } from "@config";
 
 export default function Login() {
   const [user, setUser] = useState({
@@ -11,7 +12,7 @@ export default function Login() {
 
   async function logIn() {
     try {
-      const res = await axios.post("/api/login", user);
+      const res = await axios.post(`${NEXT_API_URL}/admin/login`, user);
 
       if (res.status === 201) {
         alert("Login successful");
