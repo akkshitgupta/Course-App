@@ -40,6 +40,9 @@ export default function Page({ params }: { params: { _id: string } }) {
   const buyCourse = async (id: string) => {
     console.log(id);
     try {
+      if (!user) {
+        return alert("Please login to buy the course");
+      }
       const res = await axios.post(`/api/courses/buy`, {
         courseId: id,
         userid: user,
@@ -70,7 +73,7 @@ export default function Page({ params }: { params: { _id: string } }) {
           <div className="mt-10 flex flex-col sm:flex-row">
             <div className="text-center sm:w-1/3 sm:py-8 sm:pr-8">
               {/* <div className="inline-flex h-20 w-20 items-center justify-center rounded-full border-2 border-green-200 p-1"> */}
-              <Link href={`/64ce6e9f5502350ad5a8c0d4`}>
+              <Link href={`/${course?.author?.username}`}>
                 <Image
                   src={course?.author?.image || ""}
                   width={100}
