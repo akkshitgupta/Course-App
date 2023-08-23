@@ -14,7 +14,7 @@ export default function Login() {
 
   async function logIn() {
     try {
-      const res = await axios.post(`"${NEXT_API_URL}/admin/login`, user);
+      const res = await axios.post(`${NEXT_API_URL}/admin/login`, user);
 
       if (res.data.status === 200) {
         alert("Login successful");
