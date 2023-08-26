@@ -8,14 +8,16 @@ import Link from "next/link";
 import { PiCurrencyInrBold } from "react-icons/pi";
 import { useRouter } from "next/navigation";
 import { getSession } from "next-auth/react";
+import { NEXT_API_URL } from "@config";
+import { Session, User } from "next-auth";
 
 export default function Page({ params }: { params: { _id: string } }) {
   const router = useRouter();
-  const [user, setUser] = useState("");
+  const [user, setSession] = useState<Session>();
   const userId = async () => {
     const session = await getSession();
-    if (session?.user.id) {
-      setUser(session?.user.id);
+    if (session?.user) {
+      setSession(session);
     }
     return;
   };
@@ -38,14 +40,26 @@ export default function Page({ params }: { params: { _id: string } }) {
   userId();
 
   const buyCourse = async (id: string) => {
-    console.log(id);
     try {
       if (!user) {
         return alert("Please login to buy the course");
       }
-      const res = await axios.post(`/api/courses/buy`, {
+      const res = await axios.post(`${NEXT_API_URL}/courses/buy`, {
         courseId: id,
-        userid: user,
+        userid: user?.user.id,
+      });
+      console.log(res.data);
+      return router.push("/me");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const editCourse = async (id: string) => {
+    try {
+      const res = await axios.patch(`${NEXT_API_URL}/courses`, {
+        courseId: id,
+        userid: user?.user.id,
       });
       console.log(res.data);
       return router.push("/me");
@@ -98,12 +112,22 @@ export default function Page({ params }: { params: { _id: string } }) {
                   <PiCurrencyInrBold className="pr-1 text-2xl font-black" />
                   {course?.price || "Free"}
                 </span>
-                <button
-                  onClick={() => buyCourse(course._id)}
-                  className="w-40 rounded-md bg-green-700 py-3 text-center text-white"
-                >
-                  Buy Now
-                </button>
+                <div>
+                  {user?.user.author && (
+                    <button
+                      onClick={() => editCourse(course._id)}
+                      className="mr-2 w-32 rounded-md border border-green-700 py-3 text-center text-green-700"
+                    >
+                      Edit Course
+                    </button>
+                  )}
+                  <button
+                    onClick={() => buyCourse(course._id)}
+                    className="w-32 rounded-md bg-green-700 py-3 text-center text-white"
+                  >
+                    Buy Now
+                  </button>
+                </div>
               </div>
             </div>
           </div>

@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import EditCourseCard from "@components/EditCard";
 
 export default function AddingCourse() {
   const router = useRouter();
@@ -30,6 +31,8 @@ export default function AddingCourse() {
           </span>{" "}
           COURSE
         </h1>
+
+        <EditCourseCard course={course} />
       </div>
       <div className="mt-10 flex w-full flex-col rounded-lg bg-green-50 p-8 md:ml-auto md:mt-0 md:w-1/2 lg:w-2/6">
         <h2 className="mb-5 text-lg font-bold text-green-900">

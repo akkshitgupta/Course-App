@@ -16,7 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <RecoilRoot>
         <body className="selection:bg-green-200 selection:text-green-950">
-          <Provider session>
+          <Provider>
             <Navbar />
             <main className="min-h-screen">{children}</main>
             <Footer />

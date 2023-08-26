@@ -60,3 +60,5 @@ export async function GET() {
 
   return response;
 }
+
+export async function PATCH(req: NextRequest) {}
