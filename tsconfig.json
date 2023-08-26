@@ -29,12 +29,9 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/profile/[id]/page.jsx",
-    "components/CourseCard.tsx",
     "models/courseModel.js",
     "app/api/auth/[...nextauth]/route.js",
-    "components/Provider.jsx",
-    "app/courses/addCourse/page.jsx",
-    "app/courses/...page.tsx"
+    "app/courses/addCourse/page.jsx"
   ],
   "exclude": ["node_modules"]
 }
